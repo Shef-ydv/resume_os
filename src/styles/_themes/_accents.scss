@@ -1,0 +1,48 @@
+// macOS Accent Colors
+[data-accent='blue'] {
+  --accent: #007aff;
+  --accent-rgb: 0, 122, 255;
+  --accent-hover: #1a87ff;
+}
+
+[data-accent='purple'] {
+  --accent: #af52de;
+  --accent-rgb: 175, 82, 222;
+  --accent-hover: #be6de3;
+}
+
+[data-accent='pink'] {
+  --accent: #ff2d55;
+  --accent-rgb: 255, 45, 85;
+  --accent-hover: #ff476b;
+}
+
+[data-accent='red'] {
+  --accent: #ff3b30;
+  --accent-rgb: 255, 59, 48;
+  --accent-hover: #ff544a;
+}
+
+[data-accent='orange'] {
+  --accent: #ff9500;
+  --accent-rgb: 255, 149, 0;
+  --accent-hover: #ffa726;
+}
+
+[data-accent='yellow'] {
+  --accent: #ffcc00;
+  --accent-rgb: 255, 204, 0;
+  --accent-hover: #ffd633;
+}
+
+[data-accent='green'] {
+  --accent: #34c759;
+  --accent-rgb: 52, 199, 89;
+  --accent-hover: #4cd964;
+}
+
+[data-accent='graphite'] {
+  --accent: #8e8e93;
+  --accent-rgb: 142, 142, 147;
+  --accent-hover: #9e9ea3;
+}

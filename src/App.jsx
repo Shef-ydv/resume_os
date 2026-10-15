@@ -1,36 +1,117 @@
-import React from 'react'
-import { useState } from 'react'
-import './app.scss'
-import Dock from './components/Dock'
-import Nav from './components/Nav'
-import MacWindow from './components/windows/MacWindow'
-import Github from './components/windows/Github'
-import Note from './components/windows/Note'
-import Resume from './components/windows/Resume'
-import Spotify from './components/windows/Spotify'
-import Cli from './components/windows/Cli'
-import { github } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-const App = () => {
-  const [windowsState, setWindowsState] = useState({
-    github: false,
-    note: false,
-    resume: false,
-    spotify: false,
-    cli: false,
-    openMailComposer: false
-  })
+import React, { useState } from 'react';
+import { SettingsProvider, useSettings } from './context/SettingsContext';
+import { WindowManagerProvider } from './context/WindowManagerContext';
+import Nav from './components/Nav';
+import Dock from './components/Dock';
+import Widgets from './components/desktop/Widgets';
+import ContextMenu from './components/desktop/ContextMenu';
+import ControlCenter from './components/menubar/ControlCenter';
+import Spotlight from './components/spotlight/Spotlight';
+import BootScreen from './components/system/BootScreen';
+import LockScreen from './components/system/LockScreen';
+
+// Windows
+import Github from './components/windows/Github';
+import Note from './components/windows/Note';
+import Resume from './components/windows/Resume';
+import Cli from './components/windows/Cli';
+import Calendar from './components/windows/Calendar';
+import Mail from './components/windows/Mail';
+import Spotify from './components/windows/Spotify';
+import Settings from './components/windows/Settings';
+
+const DesktopWorkspace = () => {
+  const { hasBooted, isLocked } = useSettings();
+
+  const [isControlCenterOpen, setIsControlCenterOpen] = useState(false);
+  const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
+  const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
+
+  // Handle right-click on the desktop wallpaper
+  const handleContextMenu = (e) => {
+    // Only open if clicking on the workspace or background, not inside a window
+    if (
+      e.target.closest('.os-window') ||
+      e.target.closest('.os-dock') ||
+      e.target.closest('.os-menubar')
+    ) {
+      return;
+    }
+    e.preventDefault();
+    setContextMenu({
+      isOpen: true,
+      x: e.clientX,
+      y: e.clientY
+    });
+  };
+
+  // 1. Initial Boot Screen
+  if (!hasBooted) {
+    return <BootScreen />;
+  }
+
+  // 2. Lock Screen
+  if (isLocked) {
+    return <LockScreen />;
+  }
+
+  // 3. Desktop OS Experience
   return (
-      <main>
-        <Nav />
-        <Dock windowsState={windowsState} setWindowsState={setWindowsState} />
-        {windowsState.github && <Github windowName="github" windowsState={windowsState} setWindowsState={setWindowsState}/>}
-        {windowsState.note && <Note windowName="note" windowsState={windowsState} setWindowsState={setWindowsState}/>}
-        {windowsState.resume && <Resume windowName="resume" windowsState={windowsState} setWindowsState={setWindowsState}/>}
-        {windowsState.spotify && <Spotify windowName="spotify" windowsState={windowsState} setWindowsState={setWindowsState}/>}
-        {windowsState.cli && <Cli windowName="cli" windowsState={windowsState} setWindowsState={setWindowsState}/>}
-      </main>
+    <div className="os-desktop" onContextMenu={handleContextMenu}>
+      {/* Top Menu Bar */}
+      <Nav
+        onToggleControlCenter={() => setIsControlCenterOpen((prev) => !prev)}
+        onToggleSpotlight={() => setIsSpotlightOpen((prev) => !prev)}
+      />
 
-  )
-}
+      {/* Main OS Workspace Area */}
+      <div className="os-workspace">
+        {/* Desktop Widgets */}
+        <Widgets />
 
-export default App
+        {/* Managed Windows */}
+        <Github />
+        <Note />
+        <Resume />
+        <Cli />
+        <Calendar />
+        <Mail />
+        <Spotify />
+        <Settings />
+      </div>
+
+      {/* Bottom Dock */}
+      <Dock />
+
+      {/* Popovers, Menus, Modals */}
+      <ContextMenu
+        x={contextMenu.x}
+        y={contextMenu.y}
+        isOpen={contextMenu.isOpen}
+        onClose={() => setContextMenu((prev) => ({ ...prev, isOpen: false }))}
+      />
+
+      <ControlCenter
+        isOpen={isControlCenterOpen}
+        onClose={() => setIsControlCenterOpen(false)}
+      />
+
+      <Spotlight
+        isOpen={isSpotlightOpen}
+        onClose={(val) => setIsSpotlightOpen(typeof val === 'boolean' ? val : false)}
+      />
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <SettingsProvider>
+      <WindowManagerProvider>
+        <DesktopWorkspace />
+      </WindowManagerProvider>
+    </SettingsProvider>
+  );
+};
+
+export default App;

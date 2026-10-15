@@ -1,0 +1,164 @@
+@use '../_abstracts/variables' as *;
+@use '../_abstracts/mixins' as *;
+
+.os-window-wrapper {
+  // Container managed by react-rnd
+  display: flex !important;
+  flex-direction: column;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  &.is-minimized {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: scale(0.6) translateY(200px) !important;
+  }
+
+  &.is-focused {
+    .os-window {
+      box-shadow: var(--window-shadow);
+    }
+
+    .window-header {
+      opacity: 1;
+    }
+  }
+}
+
+.os-window {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  @include glass(36px, 190%, var(--window-bg));
+  box-shadow: var(--window-shadow-inactive);
+  border: 1px solid var(--window-border);
+  transition: box-shadow $transition-fast, border-color $transition-fast;
+  animation: windowOpen 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @include mobile {
+    border-radius: 0;
+    border: none;
+  }
+}
+
+.window-header {
+  height: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  background: var(--window-header-bg);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  user-select: none;
+  cursor: grab;
+  position: relative;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  .window-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+  }
+
+  .window-header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 50%;
+    pointer-events: none;
+    z-index: 1;
+
+    .window-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      @include truncate;
+    }
+  }
+
+  .window-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+  }
+}
+
+// macOS Traffic Light Dots
+.traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover {
+    .traffic-dot svg {
+      opacity: 0.8;
+    }
+  }
+
+  .traffic-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.4);
+
+    svg {
+      width: 8px;
+      height: 8px;
+      opacity: 0;
+      transition: opacity 0.12s ease;
+      color: rgba(0, 0, 0, 0.7);
+    }
+
+    &.close {
+      background: #ff5f56;
+      border: 0.5px solid #e0443e;
+
+      &:hover {
+        background: #ff3b30;
+      }
+    }
+
+    &.minimize {
+      background: #ffbd2e;
+      border: 0.5px solid #dea123;
+
+      &:hover {
+        background: #ff9500;
+      }
+    }
+
+    &.maximize {
+      background: #27c93f;
+      border: 0.5px solid #1aab29;
+
+      &:hover {
+        background: #34c759;
+      }
+    }
+  }
+}
+
+.window-content {
+  flex: 1;
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  @include mac-scrollbar;
+}

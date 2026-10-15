@@ -1,0 +1,44 @@
+// SCSS Variables & Tokens
+// Typography
+$font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+$font-mono: 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+// Base Z-Indices
+$z-desktop: 1;
+$z-widgets: 10;
+$z-windows-base: 100;
+$z-dock: 9000;
+$z-menubar: 9100;
+$z-dropdown: 9200;
+$z-spotlight: 9500;
+$z-control-center: 9300;
+$z-context-menu: 9600;
+$z-lock-screen: 9900;
+$z-boot-screen: 10000;
+
+// Border Radii
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 22px;
+$radius-pill: 9999px;
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+$shadow-md: 0 8px 24px rgba(0, 0, 0, 0.2);
+$shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.35);
+$shadow-window: 0 22px 70px 4px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1);
+$shadow-window-inactive: 0 12px 36px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+
+// Transitions
+$ease-mac: cubic-bezier(0.16, 1, 0.3, 1);
+$transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+$transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+$transition-bounce: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+// Breakpoints
+$bp-mobile: 640px;
+$bp-tablet: 868px;
+$bp-desktop: 1024px;
+$bp-wide: 1280px;

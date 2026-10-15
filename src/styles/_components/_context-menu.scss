@@ -1,0 +1,48 @@
+@use '../_abstracts/variables' as *;
+@use '../_abstracts/mixins' as *;
+
+.desktop-context-menu {
+  position: fixed;
+  min-width: 210px;
+  padding: 6px;
+  border-radius: $radius-md;
+  @include glass(36px, 190%, var(--menu-dropdown-bg));
+  border: 1px solid var(--menu-dropdown-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  z-index: $z-context-menu;
+  animation: popoverIn 0.12s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  .context-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: $radius-sm;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: var(--text-secondary);
+    }
+
+    &:hover {
+      background: var(--accent);
+      color: #ffffff;
+
+      svg {
+        color: #ffffff;
+      }
+    }
+  }
+
+  .context-divider {
+    height: 1px;
+    background: var(--glass-border-subtle);
+    margin: 4px 6px;
+  }
+}

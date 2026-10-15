@@ -1,0 +1,33 @@
+// Main SCSS Architecture for Resume OS
+// Abstracts
+@use './_abstracts/variables' as *;
+@use './_abstracts/mixins' as *;
+
+// Base
+@use './_base/reset' as *;
+@use './_base/typography' as *;
+@use './_base/global' as *;
+
+// Themes
+@use './_themes/accents' as *;
+@use './_themes/wallpapers' as *;
+
+// System Animations
+@use './_animations' as *;
+
+// Components
+@use './_components/menubar' as *;
+@use './_components/dock' as *;
+@use './_components/window' as *;
+@use './_components/settings' as *;
+@use './_components/terminal' as *;
+@use './_components/projects' as *;
+@use './_components/notes' as *;
+@use './_components/calendar' as *;
+@use './_components/mail' as *;
+@use './_components/music' as *;
+@use './_components/spotlight' as *;
+@use './_components/control-center' as *;
+@use './_components/context-menu' as *;
+@use './_components/widgets' as *;
+@use './_components/boot-screen' as *;

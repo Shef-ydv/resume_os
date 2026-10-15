@@ -1,0 +1,153 @@
+@use '../_abstracts/variables' as *;
+@use '../_abstracts/mixins' as *;
+
+.terminal-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(18, 18, 22, 0.95);
+  font-family: $font-mono;
+  font-size: 13px;
+  color: #f1f1f1;
+  overflow: hidden;
+  position: relative;
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  @include mac-scrollbar;
+  line-height: 1.55;
+}
+
+.terminal-line {
+  margin-bottom: 6px;
+  word-break: break-word;
+  white-space: pre-wrap;
+
+  &.is-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  &.is-output {
+    color: #e2e8f0;
+  }
+
+  &.is-error {
+    color: #ff5f56;
+  }
+
+  &.is-success {
+    color: #34c759;
+  }
+
+  &.is-accent {
+    color: var(--accent);
+  }
+}
+
+.terminal-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  .prompt-user {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .prompt-symbol {
+    color: #27c93f;
+    font-weight: 700;
+  }
+
+  .prompt-path {
+    color: #ffd60a;
+  }
+}
+
+.terminal-input-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 140px;
+
+  input {
+    flex: 1;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: inherit;
+    background: transparent;
+    border: none;
+    outline: none;
+    caret-color: var(--accent);
+  }
+}
+
+// Neofetch Ascii Art Layout
+.neofetch-output {
+  display: flex;
+  gap: 24px;
+  margin: 12px 0;
+  align-items: center;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ascii-art {
+    color: var(--accent);
+    line-height: 1.15;
+    font-size: 11px;
+    white-space: pre;
+  }
+
+  .neofetch-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+
+    .info-row {
+      display: flex;
+      gap: 8px;
+
+      .info-key {
+        color: var(--accent);
+        font-weight: 600;
+        min-width: 90px;
+      }
+
+      .info-val {
+        color: #f1f5f9;
+      }
+    }
+
+    .color-blocks {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+
+      span {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+      }
+    }
+  }
+}
+
+// Matrix Easter Egg Canvas
+.matrix-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: black;
+}

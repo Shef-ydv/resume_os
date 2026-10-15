@@ -1,0 +1,352 @@
+@use '../_abstracts/variables' as *;
+@use '../_abstracts/mixins' as *;
+
+.projects-window {
+  display: flex;
+  height: 100%;
+  background: var(--window-bg);
+  overflow: hidden;
+
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+// Finder-style Sidebar
+.projects-sidebar {
+  width: 190px;
+  min-width: 190px;
+  background: rgba(0, 0, 0, 0.12);
+  border-right: 1px solid var(--glass-border-subtle);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  @include mobile {
+    width: 100%;
+    min-width: unset;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border-subtle);
+    padding: 6px;
+  }
+
+  .sidebar-heading {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 8px 2px;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .sidebar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: $radius-sm;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background $transition-fast;
+
+    .sidebar-btn-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+        opacity: 0.85;
+      }
+    }
+
+    .badge-count {
+      font-size: 11px;
+      color: var(--text-tertiary);
+    }
+
+    &:hover {
+      background: var(--control-hover);
+    }
+
+    &.is-active {
+      background: var(--accent);
+      color: #ffffff;
+
+      .badge-count {
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    @include mobile {
+      white-space: nowrap;
+    }
+  }
+}
+
+// Main Projects Area
+.projects-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// Finder Top Toolbar
+.projects-toolbar {
+  height: 44px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--glass-border-subtle);
+  background: rgba(0, 0, 0, 0.05);
+  gap: 12px;
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: $radius-sm;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    width: 220px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+      color: var(--text-tertiary);
+    }
+
+    input {
+      width: 100%;
+      font-size: 12px;
+      color: var(--text-primary);
+
+      &::placeholder {
+        color: var(--text-tertiary);
+      }
+    }
+  }
+
+  .view-toggles {
+    display: flex;
+    align-items: center;
+    background: var(--control-bg);
+    border-radius: $radius-sm;
+    padding: 2px;
+
+    button {
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &.is-active {
+        background: var(--window-bg);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+// Projects Grid View
+.projects-scroll {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  @include mac-scrollbar;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: $radius-md;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform $transition-fast, box-shadow $transition-fast, border-color $transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-md;
+    border-color: var(--accent);
+  }
+
+  .card-media {
+    position: relative;
+    width: 100%;
+    height: 148px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.05);
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 3px 8px;
+      border-radius: $radius-pill;
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+    }
+  }
+
+  .card-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .card-description {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+
+    .tag-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+
+      .chip {
+        padding: 2px 7px;
+        border-radius: 4px;
+        background: var(--glass-subtle);
+        border: 1px solid var(--glass-border-subtle);
+        font-size: 11px;
+        color: var(--text-secondary);
+      }
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+
+      a, button {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: $radius-sm;
+        font-size: 12px;
+        font-weight: 500;
+        transition: all $transition-fast;
+
+        &.btn-demo {
+          background: var(--accent);
+          color: #ffffff;
+
+          &:hover {
+            filter: brightness(1.1);
+          }
+        }
+
+        &.btn-repo {
+          background: var(--control-bg);
+          color: var(--text-primary);
+
+          &:hover {
+            background: var(--control-hover);
+          }
+        }
+
+        svg {
+          width: 13px;
+          height: 13px;
+        }
+      }
+    }
+  }
+}
+
+// Project List View
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .list-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: $radius-sm;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    transition: background $transition-fast;
+
+    &:hover {
+      background: var(--card-hover-bg);
+    }
+
+    .row-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .row-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        background: var(--glass-subtle);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .row-title {
+        font-size: 13px;
+        font-weight: 600;
+      }
+    }
+  }
+}

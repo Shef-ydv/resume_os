@@ -1,0 +1,74 @@
+@use './variables' as *;
+
+// Glassmorphism mixin with customizable blur and opacity
+@mixin glass($blur: 24px, $saturate: 180%, $bg-fallback: rgba(30, 30, 30, 0.75)) {
+  background: var(--glass-bg, #{$bg-fallback});
+  backdrop-filter: blur($blur) saturate($saturate);
+  -webkit-backdrop-filter: blur($blur) saturate($saturate);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.12));
+}
+
+// Subtle glass for nested elements
+@mixin glass-subtle($blur: 16px) {
+  background: var(--glass-subtle, rgba(255, 255, 255, 0.06));
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid var(--glass-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+// Responsive Breakpoints
+@mixin mobile {
+  @media (max-width: #{$bp-mobile}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$bp-tablet}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$bp-desktop}) {
+    @content;
+  }
+}
+
+// Accessibility: Reduced Motion
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// Text truncation
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Custom macOS-style scrollbar
+@mixin mac-scrollbar {
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb, rgba(255, 255, 255, 0.22));
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+
+    &:hover {
+      background: var(--scrollbar-thumb-hover, rgba(255, 255, 255, 0.38));
+      background-clip: padding-box;
+    }
+  }
+}

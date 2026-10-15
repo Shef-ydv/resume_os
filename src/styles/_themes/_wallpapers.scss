@@ -1,0 +1,104 @@
+// macOS Dynamic Wallpapers & Gradients
+
+.wallpaper-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.6s ease;
+}
+
+// 1. Dark Bokeh (Original warm red/orange bokeh)
+[data-wallpaper='dark-bokeh'] .os-desktop {
+  background-image: url('/background.jpg');
+  background-color: #12080a;
+}
+
+// 2. Aurora Borealis (Teal, emerald, and midnight blue dynamic glow)
+[data-wallpaper='aurora'] .os-desktop {
+  background: radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.4) 0%, transparent 50%),
+              radial-gradient(circle at 80% 40%, rgba(6, 182, 212, 0.45) 0%, transparent 60%),
+              radial-gradient(circle at 50% 80%, rgba(99, 102, 241, 0.35) 0%, transparent 60%),
+              linear-gradient(135deg, #030b1e 0%, #08203e 50%, #031525 100%);
+  background-size: 200% 200%;
+  animation: auroraFlow 18s ease infinite alternate;
+}
+
+// 3. Sunset Gradient (California Sunset - Violet, coral, warm amber)
+[data-wallpaper='sunset'] .os-desktop {
+  background: radial-gradient(circle at 10% 90%, rgba(251, 146, 60, 0.7) 0%, transparent 50%),
+              radial-gradient(circle at 85% 20%, rgba(236, 72, 153, 0.6) 0%, transparent 60%),
+              radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 70%),
+              linear-gradient(160deg, #1f1135 0%, #3e1948 40%, #7c2d4d 75%, #b45309 100%);
+}
+
+// 4. Cyberpunk Neon (Deep obsidian with razor neon magenta & cyan)
+[data-wallpaper='cyberpunk'] .os-desktop {
+  background: radial-gradient(circle at 15% 25%, rgba(236, 72, 153, 0.5) 0%, transparent 45%),
+              radial-gradient(circle at 85% 75%, rgba(6, 182, 212, 0.5) 0%, transparent 45%),
+              radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.3) 0%, transparent 60%),
+              linear-gradient(135deg, #09090f 0%, #150a21 50%, #05141e 100%);
+}
+
+// 5. Minimal Light (Apple Studio Clean Light Mode)
+[data-wallpaper='minimal-light'] .os-desktop {
+  background: radial-gradient(circle at 30% 20%, rgba(219, 234, 254, 0.8) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(243, 232, 255, 0.8) 0%, transparent 50%),
+              linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 50%, #e2e8f0 100%);
+}
+
+// 6. Forest (Deep Pine, moss, emerald misty woodland)
+[data-wallpaper='forest'] .os-desktop {
+  background: radial-gradient(circle at 25% 40%, rgba(74, 222, 128, 0.25) 0%, transparent 50%),
+              radial-gradient(circle at 75% 70%, rgba(20, 83, 45, 0.6) 0%, transparent 60%),
+              linear-gradient(150deg, #05130b 0%, #0b2617 45%, #051b11 85%, #020b06 100%);
+}
+
+// 7. Ocean (Pacific Mariana trench blue with luminous turquoise)
+[data-wallpaper='ocean'] .os-desktop {
+  background: radial-gradient(circle at 70% 30%, rgba(14, 165, 233, 0.35) 0%, transparent 50%),
+              radial-gradient(circle at 20% 70%, rgba(2, 132, 199, 0.3) 0%, transparent 55%),
+              linear-gradient(140deg, #020d1c 0%, #08213e 40%, #093c66 70%, #021226 100%);
+}
+
+// 8. Animated Gradient (Dynamic fluid mesh with organic morphing)
+[data-wallpaper='animated-gradient'] .os-desktop {
+  background: linear-gradient(
+    -45deg,
+    #ee7752,
+    #e73c7e,
+    #23a6d5,
+    #23d5ab,
+    #6366f1
+  );
+  background-size: 400% 400%;
+  animation: chromaticLiquid 14s ease infinite;
+}
+
+@keyframes auroraFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes chromaticLiquid {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

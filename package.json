@@ -11,6 +11,8 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "canvas-confetti": "^1.9.4",
+    "lucide-react": "^1.52.0",
     "react": "^19.2.0",
     "react-console-emulator": "^5.0.2",
     "react-dom": "^19.2.0",
