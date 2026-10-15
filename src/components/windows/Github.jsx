@@ -173,25 +173,20 @@ const Github = () => {
                       </div>
                       <div>
                         <div className="row-title">{proj.title}</div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+                        <div className="row-tags">
                           {proj.tags.join(' • ')}
                         </div>
                       </div>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '8px' }}>
+                    <div className="row-actions">
                       <a
                         href={proj.demoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{
-                          padding: '5px 10px',
-                          borderRadius: '6px',
-                          background: 'var(--accent)',
-                          color: '#fff',
-                          fontSize: '11px',
-                          fontWeight: '600'
-                        }}
+                        className="btn-demo"
+                        data-cursor="pointer"
+                        data-cursor-text="Demo"
                       >
                         Demo
                       </a>
@@ -199,14 +194,9 @@ const Github = () => {
                         href={proj.repoLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{
-                          padding: '5px 10px',
-                          borderRadius: '6px',
-                          background: 'var(--control-bg)',
-                          color: 'var(--text-primary)',
-                          fontSize: '11px',
-                          fontWeight: '500'
-                        }}
+                        className="btn-repo"
+                        data-cursor="pointer"
+                        data-cursor-text="Code"
                       >
                         Code
                       </a>

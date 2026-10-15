@@ -29,7 +29,7 @@ const Resume = () => {
       >
         <ZoomOut size={13} />
       </button>
-      <span style={{ fontSize: '11px', minWidth: '32px', textAlign: 'center' }}>
+      <span style={{ fontSize: '0.8125rem', minWidth: '36px', textAlign: 'center', fontWeight: 500 }}>
         {zoomLevel}%
       </span>
       <button
@@ -86,15 +86,15 @@ const Resume = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
-                padding: '4px 10px',
+                padding: '6px 12px',
                 borderRadius: '6px',
                 background: 'var(--control-bg)',
                 color: 'var(--text-primary)',
-                fontSize: '11px',
+                fontSize: '0.8125rem',
                 fontWeight: '500'
               }}
             >
-              <ExternalLink size={12} /> Open Full
+              <ExternalLink size={14} /> Open Full
             </a>
             <a
               href="/resume.pdf"
@@ -103,15 +103,15 @@ const Resume = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '5px',
-                padding: '4px 12px',
+                padding: '6px 14px',
                 borderRadius: '6px',
                 background: 'var(--accent)',
                 color: '#fff',
-                fontSize: '11px',
+                fontSize: '0.8125rem',
                 fontWeight: '600'
               }}
             >
-              <Download size={12} /> Download PDF
+              <Download size={14} /> Download PDF
             </a>
           </div>
         </div>

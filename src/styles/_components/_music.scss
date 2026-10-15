@@ -53,14 +53,14 @@
     margin-top: 14px;
 
     .track-title {
-      font-size: 15px;
+      font-size: $font-size-base;
       font-weight: 700;
       color: var(--text-primary);
       margin-bottom: 4px;
     }
 
     .track-artist {
-      font-size: 12px;
+      font-size: $font-size-sm;
       color: var(--text-secondary);
     }
   }

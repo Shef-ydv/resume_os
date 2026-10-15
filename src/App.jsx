@@ -7,8 +7,13 @@ import Widgets from './components/desktop/Widgets';
 import ContextMenu from './components/desktop/ContextMenu';
 import ControlCenter from './components/menubar/ControlCenter';
 import Spotlight from './components/spotlight/Spotlight';
-import BootScreen from './components/system/BootScreen';
+import LoadingScreen from './components/system/LoadingScreen';
 import LockScreen from './components/system/LockScreen';
+
+// Popovers, Overlays & Desktop Additions
+import SnapPreview from './components/desktop/SnapPreview';
+import MissionControl from './components/desktop/MissionControl';
+import Cursor from './components/desktop/Cursor';
 
 // Windows
 import Github from './components/windows/Github';
@@ -21,11 +26,18 @@ import Spotify from './components/windows/Spotify';
 import Settings from './components/windows/Settings';
 
 const DesktopWorkspace = () => {
-  const { hasBooted, isLocked } = useSettings();
+  const { hasBooted, isLocked, completeBoot } = useSettings();
 
   const [isControlCenterOpen, setIsControlCenterOpen] = useState(false);
   const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
   const [contextMenu, setContextMenu] = useState({ isOpen: false, x: 0, y: 0 });
+  const [isEntering, setIsEntering] = useState(false);
+
+  const handleLoadingComplete = () => {
+    setIsEntering(true);
+    completeBoot();
+    setTimeout(() => setIsEntering(false), 800);
+  };
 
   // Handle right-click on the desktop wallpaper
   const handleContextMenu = (e) => {
@@ -45,9 +57,9 @@ const DesktopWorkspace = () => {
     });
   };
 
-  // 1. Initial Boot Screen
+  // 1. Minimal Classic Loading Screen
   if (!hasBooted) {
-    return <BootScreen />;
+    return <LoadingScreen onComplete={handleLoadingComplete} />;
   }
 
   // 2. Lock Screen
@@ -57,7 +69,10 @@ const DesktopWorkspace = () => {
 
   // 3. Desktop OS Experience
   return (
-    <div className="os-desktop" onContextMenu={handleContextMenu}>
+    <div
+      className={`os-desktop ${isEntering ? 'loading-entering' : ''}`}
+      onContextMenu={handleContextMenu}
+    >
       {/* Top Menu Bar */}
       <Nav
         onToggleControlCenter={() => setIsControlCenterOpen((prev) => !prev)}
@@ -100,6 +115,15 @@ const DesktopWorkspace = () => {
         isOpen={isSpotlightOpen}
         onClose={(val) => setIsSpotlightOpen(typeof val === 'boolean' ? val : false)}
       />
+
+      {/* Snap Preview Translucent Overlay */}
+      <SnapPreview />
+
+      {/* Mission Control Window Manager Overlay */}
+      <MissionControl />
+
+      {/* Interactive Mouse Follower */}
+      <Cursor />
     </div>
   );
 };

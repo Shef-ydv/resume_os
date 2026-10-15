@@ -3,18 +3,38 @@
 $font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
 $font-mono: 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 
+// Typography Scale (Controlled centrally with rem units)
+// Base 1rem = 16px (scalable via --font-scale)
+$font-size-2xs: 0.7rem;    // ~11.2px
+$font-size-xs:  0.8rem;    // ~12.8px
+$font-size-sm:  0.875rem;  // 14px
+$font-size-base: 0.95rem;  // ~15.2px
+$font-size-md:  1rem;      // 16px
+$font-size-lg:  1.15rem;   // ~18.4px
+$font-size-xl:  1.35rem;   // ~21.6px
+$font-size-2xl: 1.6rem;    // ~25.6px
+$font-size-3xl: 2rem;      // 32px
+$font-size-4xl: 2.5rem;    // 40px
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.55;
+$line-height-relaxed: 1.68;
+
 // Base Z-Indices
 $z-desktop: 1;
 $z-widgets: 10;
 $z-windows-base: 100;
+$z-snap-preview: 8800;
+$z-mission-control: 8900;
 $z-dock: 9000;
 $z-menubar: 9100;
 $z-dropdown: 9200;
-$z-spotlight: 9500;
 $z-control-center: 9300;
+$z-spotlight: 9500;
 $z-context-menu: 9600;
 $z-lock-screen: 9900;
 $z-boot-screen: 10000;
+$z-cursor: 99999;
 
 // Border Radii
 $radius-xs: 4px;

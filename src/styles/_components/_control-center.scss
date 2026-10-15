@@ -61,7 +61,7 @@
       flex-direction: column;
 
       .tile-label {
-        font-size: 12px;
+        font-size: $font-size-sm;
         font-weight: 600;
         color: var(--text-primary);
       }
@@ -119,23 +119,23 @@
       flex-direction: column;
 
       strong {
-        font-size: 13px;
+        font-size: $font-size-base;
         color: var(--text-primary);
       }
 
       small {
-        font-size: 11px;
+        font-size: $font-size-xs;
         color: var(--text-secondary);
       }
     }
   }
 
   .btn-open-recruiter {
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: $radius-sm;
     background: var(--accent);
     color: #fff;
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: 600;
   }
 }
@@ -154,7 +154,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: 600;
     color: var(--text-secondary);
 

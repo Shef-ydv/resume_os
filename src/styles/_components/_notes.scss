@@ -29,7 +29,7 @@
 
   .sidebar-header {
     padding: 12px 14px;
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: 600;
     color: var(--text-tertiary);
     text-transform: uppercase;
@@ -48,7 +48,7 @@
   }
 
   .note-list-item {
-    padding: 10px 12px;
+    padding: 10px 14px;
     border-radius: $radius-sm;
     cursor: pointer;
     transition: background $transition-fast;
@@ -63,25 +63,25 @@
 
       .note-preview,
       .note-date {
-        color: rgba(255, 255, 255, 0.8) !important;
+        color: rgba(255, 255, 255, 0.85) !important;
       }
     }
 
     .note-title {
-      font-size: 13px;
+      font-size: $font-size-base; // 15px
       font-weight: 600;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
       @include truncate;
     }
 
     .note-preview {
-      font-size: 11px;
+      font-size: $font-size-xs; // 13px
       color: var(--text-secondary);
       @include truncate;
     }
 
     .note-date {
-      font-size: 10px;
+      font-size: $font-size-2xs;
       color: var(--text-tertiary);
       margin-top: 4px;
     }
@@ -96,7 +96,7 @@
 }
 
 .notes-toolbar {
-  height: 42px;
+  height: 44px;
   padding: 0 16px;
   display: flex;
   align-items: center;
@@ -111,8 +111,8 @@
     padding: 2px;
 
     button {
-      padding: 3px 10px;
-      font-size: 11px;
+      padding: 5px 12px;
+      font-size: $font-size-xs; // 13px
       font-weight: 600;
       border-radius: 4px;
 
@@ -132,14 +132,14 @@
   @include mac-scrollbar;
 
   .note-doc-title {
-    font-size: 24px;
+    font-size: $font-size-2xl; // ~26px
     font-weight: 700;
     margin-bottom: 8px;
     color: var(--text-primary);
   }
 
   .note-doc-meta {
-    font-size: 12px;
+    font-size: $font-size-sm; // 14px
     color: var(--text-tertiary);
     margin-bottom: 20px;
     padding-bottom: 12px;
@@ -147,27 +147,27 @@
   }
 
   .note-body {
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: $font-size-base; // 15.5px
+    line-height: $line-height-relaxed;
     color: var(--text-primary);
 
     h2 {
-      font-size: 18px;
+      font-size: $font-size-xl; // 21px
       font-weight: 600;
-      margin: 20px 0 10px;
+      margin: 24px 0 12px;
       color: var(--accent);
     }
 
     p {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     ul {
-      margin-left: 20px;
-      margin-bottom: 14px;
+      margin-left: 24px;
+      margin-bottom: 16px;
 
       li {
-        margin-bottom: 6px;
+        margin-bottom: 8px;
       }
     }
   }
@@ -180,8 +180,9 @@
 
     pre {
       margin: 0 !important;
-      padding: 16px !important;
-      font-size: 12px !important;
+      padding: 18px !important;
+      font-size: $font-size-sm !important; // 14-15px
+      line-height: 1.5 !important;
       background: rgba(15, 15, 20, 0.95) !important;
     }
   }

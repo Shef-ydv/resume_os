@@ -1,0 +1,38 @@
+@use '../_abstracts/variables' as *;
+@use '../_abstracts/mixins' as *;
+
+// Snap-to-Edge Translucent Glass Overlay
+.snap-preview-overlay {
+  position: fixed;
+  z-index: $z-snap-preview;
+  pointer-events: none;
+  border-radius: $radius-lg;
+  background: rgba(var(--accent-rgb), 0.18);
+  border: 2px solid var(--accent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 40px rgba(var(--accent-rgb), 0.25);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: popoverIn 0.16s ease forwards;
+
+  &.snap-left {
+    top: 36px;
+    left: 8px;
+    width: calc(50vw - 12px);
+    height: calc(100vh - 36px - 78px);
+  }
+
+  &.snap-right {
+    top: 36px;
+    left: calc(50vw + 4px);
+    width: calc(50vw - 12px);
+    height: calc(100vh - 36px - 78px);
+  }
+
+  &.snap-top {
+    top: 36px;
+    left: 8px;
+    width: calc(100vw - 16px);
+    height: calc(100vh - 36px - 78px);
+  }
+}

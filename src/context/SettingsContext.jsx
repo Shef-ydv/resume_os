@@ -13,22 +13,37 @@ const DEFAULT_SETTINGS = {
   dockMagnification: true,
   dockPosition: 'bottom',
   soundEnabled: true,
+  fontSize: 'medium', // 'small' | 'medium' | 'large'
+  cursorStyle: 'glow', // 'glow' | 'trail' | 'default' | 'off'
+  showIntro: true, // Show minimal classic loading screen on startup
   hasBooted: false,
   isLocked: false
 };
 
 export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState(() => {
+    let initialHasBooted = false;
     try {
+      const introSeen = sessionStorage.getItem('resume_os_intro_seen') === 'true';
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return { ...DEFAULT_SETTINGS, ...parsed, isLocked: false };
+        if (parsed.showIntro === false || introSeen) {
+          initialHasBooted = true;
+        }
+        return {
+          ...DEFAULT_SETTINGS,
+          ...parsed,
+          hasBooted: initialHasBooted,
+          isLocked: false
+        };
+      } else if (introSeen) {
+        initialHasBooted = true;
       }
     } catch {
-      // localStorage unavailable or invalid JSON
+      // storage unavailable
     }
-    return DEFAULT_SETTINGS;
+    return { ...DEFAULT_SETTINGS, hasBooted: initialHasBooted };
   });
 
   // Keep sound effects synchronized
@@ -53,6 +68,14 @@ export const SettingsProvider = ({ children }) => {
     root.setAttribute('data-theme', activeTheme);
     root.setAttribute('data-wallpaper', settings.wallpaper);
     root.setAttribute('data-accent', settings.accent);
+
+    // Dynamic Font Scale
+    const fontScales = { small: '0.9', medium: '1', large: '1.15' };
+    const activeScale = fontScales[settings.fontSize] || '1';
+    root.style.setProperty('--font-scale', activeScale);
+
+    // Cursor Style
+    root.setAttribute('data-cursor-style', settings.cursorStyle || 'glow');
   }, [settings]);
 
   const updateSettings = (keyOrObj, value) => {
@@ -78,11 +101,20 @@ export const SettingsProvider = ({ children }) => {
   };
 
   const completeBoot = () => {
-    updateSettings({ hasBooted: true, isLocked: true });
-    sounds.startupChime();
+    try {
+      sessionStorage.setItem('resume_os_intro_seen', 'true');
+    } catch {
+      // storage unavailable
+    }
+    updateSettings({ hasBooted: true, isLocked: false });
   };
 
   const restartSystem = () => {
+    try {
+      sessionStorage.removeItem('resume_os_intro_seen');
+    } catch {
+      // storage unavailable
+    }
     updateSettings({ hasBooted: false, isLocked: false });
   };
 
@@ -95,7 +127,8 @@ export const SettingsProvider = ({ children }) => {
         lockScreen,
         unlockScreen,
         completeBoot,
-        restartSystem
+        restartSystem,
+        replayIntro: restartSystem
       }}
     >
       {children}

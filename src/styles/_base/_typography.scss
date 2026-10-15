@@ -1,9 +1,13 @@
 @use '../_abstracts/variables' as *;
 
+html {
+  font-size: calc(16px * var(--font-scale, 1));
+}
+
 body {
   font-family: $font-system;
-  font-size: 13px;
-  line-height: 1.4;
+  font-size: $font-size-md; // 1rem (~16px)
+  line-height: $line-height-normal;
   letter-spacing: -0.01em;
   color: var(--text-primary);
 }
@@ -13,32 +17,36 @@ pre,
 kbd,
 samp {
   font-family: $font-mono;
+  font-size: $font-size-base;
 }
 
 h1, .h1 {
-  font-size: 24px;
+  font-size: $font-size-2xl; // ~25px
   font-weight: 700;
   letter-spacing: -0.02em;
+  line-height: $line-height-tight;
 }
 
 h2, .h2 {
-  font-size: 18px;
+  font-size: $font-size-xl; // ~21px
   font-weight: 600;
   letter-spacing: -0.015em;
+  line-height: $line-height-tight;
 }
 
 h3, .h3 {
-  font-size: 15px;
+  font-size: $font-size-lg; // ~18.5px
   font-weight: 600;
+  line-height: $line-height-tight;
 }
 
 h4, .h4 {
-  font-size: 13px;
+  font-size: $font-size-md; // 16px
   font-weight: 600;
 }
 
 .text-caption {
-  font-size: 11px;
+  font-size: $font-size-xs;
   color: var(--text-secondary);
 }
 

@@ -6,13 +6,13 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 30px;
+  height: 32px;
   z-index: $z-menubar;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
-  font-size: 13px;
+  padding: 0 14px;
+  font-size: $font-size-sm; // 14px
   font-weight: 500;
   color: var(--text-primary);
   @include glass(24px, 180%, var(--menubar-bg));
@@ -25,15 +25,15 @@
     display: flex;
     align-items: center;
     height: 100%;
-    gap: 2px;
+    gap: 4px;
   }
 
   .menubar-item {
     position: relative;
     display: flex;
     align-items: center;
-    height: 22px;
-    padding: 0 8px;
+    height: 24px;
+    padding: 0 10px;
     border-radius: $radius-xs;
     cursor: default;
     transition: background $transition-fast, color $transition-fast;
@@ -48,10 +48,10 @@
     }
 
     &.apple-logo {
-      padding: 0 6px;
+      padding: 0 8px;
       svg, img {
-        width: 14px;
-        height: 14px;
+        width: 15px;
+        height: 15px;
       }
     }
   }
@@ -59,13 +59,13 @@
   .recruiter-pill {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 2px 10px;
+    gap: 6px;
+    padding: 3px 12px;
     margin-right: 6px;
     border-radius: $radius-pill;
     background: linear-gradient(135deg, var(--accent) 0%, rgba(var(--accent-rgb), 0.75) 100%);
     color: #ffffff;
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: 600;
     letter-spacing: 0.2px;
     cursor: pointer;
@@ -82,8 +82,8 @@
     }
 
     svg {
-      width: 12px;
-      height: 12px;
+      width: 13px;
+      height: 13px;
     }
   }
 
@@ -91,8 +91,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 26px;
-    height: 22px;
+    width: 28px;
+    height: 24px;
     border-radius: $radius-xs;
     cursor: pointer;
 
@@ -101,15 +101,15 @@
     }
 
     svg {
-      width: 14px;
-      height: 14px;
+      width: 15px;
+      height: 15px;
       opacity: 0.88;
     }
   }
 
   .datetime-display {
-    padding: 0 6px;
-    font-size: 12px;
+    padding: 0 8px;
+    font-size: $font-size-sm; // 14px
     font-weight: 500;
     cursor: pointer;
     border-radius: $radius-xs;
@@ -131,8 +131,8 @@
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  min-width: 200px;
-  padding: 5px;
+  min-width: 210px;
+  padding: 6px;
   border-radius: $radius-sm;
   @include glass(30px, 190%, var(--menu-dropdown-bg));
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
@@ -149,9 +149,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: $radius-xs;
-    font-size: 12px;
+    font-size: $font-size-sm; // 14px
     color: var(--text-primary);
     cursor: pointer;
     transition: background $transition-fast;
@@ -161,7 +161,7 @@
       color: #ffffff;
 
       .dropdown-shortcut {
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.85);
       }
     }
 
@@ -171,7 +171,7 @@
     }
 
     .dropdown-shortcut {
-      font-size: 11px;
+      font-size: $font-size-xs;
       color: var(--text-tertiary);
     }
   }

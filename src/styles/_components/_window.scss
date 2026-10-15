@@ -44,12 +44,12 @@
 }
 
 .window-header {
-  height: 40px;
-  min-height: 40px;
+  height: 42px;
+  min-height: 42px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 0 16px;
   background: var(--window-header-bg);
   border-bottom: 1px solid var(--glass-border-subtle);
   user-select: none;
@@ -74,14 +74,15 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    max-width: 50%;
+    max-width: 55%;
     pointer-events: none;
     z-index: 1;
 
     .window-title {
-      font-size: 13px;
+      font-size: $font-size-sm; // 14px-15px
       font-weight: 600;
       color: var(--text-primary);
+      letter-spacing: -0.01em;
       @include truncate;
     }
   }
@@ -160,5 +161,7 @@
   overflow: auto;
   display: flex;
   flex-direction: column;
+  font-size: $font-size-base; // 15-16px
+  line-height: $line-height-normal;
   @include mac-scrollbar;
 }

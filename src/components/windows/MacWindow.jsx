@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Rnd } from 'react-rnd';
 import { X, Minus, Maximize2 } from 'lucide-react';
 import { useWindowManager, WINDOW_CONFIGS } from '../../context/WindowManagerContext';
@@ -12,8 +12,13 @@ const MacWindow = ({ windowId, children, customToolbar }) => {
     minimizeWindow,
     toggleMaximize,
     updatePosition,
-    updateSize
+    updateSize,
+    setSnapPreview,
+    applySnap,
+    snapPreview
   } = useWindowManager();
+
+  const [isDragging, setIsDragging] = useState(false);
 
   const win = windows[windowId];
   const config = WINDOW_CONFIGS[windowId] || {};
@@ -24,41 +29,84 @@ const MacWindow = ({ windowId, children, customToolbar }) => {
   const isFocused = activeWindowId === windowId;
   const isMaximized = win.isMaximized || isMobile;
 
+  const screenWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
+  const screenHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
+
   const rndProps = isMaximized
     ? {
-        position: { x: 0, y: isMobile ? 30 : 30 },
+        position: { x: 0, y: isMobile ? 32 : 32 },
         size: {
           width: '100vw',
-          height: isMobile ? 'calc(100vh - 30px)' : 'calc(100vh - 30px - 70px)'
+          height: isMobile ? 'calc(100vh - 32px)' : 'calc(100vh - 32px - 74px)'
         },
         disableDragging: true,
         enableResizing: false
       }
     : {
-        position: { x: win.x ?? config.defaultPos?.x ?? 150, y: win.y ?? config.defaultPos?.y ?? 80 },
+        position: {
+          x: win.x ?? config.defaultPos?.x ?? 120,
+          y: Math.max(32, win.y ?? config.defaultPos?.y ?? 60)
+        },
         size: {
-          width: win.width ?? config.defaultSize?.width ?? 680,
-          height: win.height ?? config.defaultSize?.height ?? 460
+          width: win.width ?? config.defaultSize?.width ?? 720,
+          height: win.height ?? config.defaultSize?.height ?? 480
         },
         minWidth: config.minWidth || 380,
         minHeight: config.minHeight || 280,
-        bounds: '.os-workspace',
+        bounds: {
+          top: 32, // Menubar constraint: titlebar NEVER goes under 32px!
+          left: -((win.width || 720) - 100),
+          right: screenWidth - 80,
+          bottom: screenHeight - 60
+        },
         dragHandleClassName: '.window-header'
       };
+
+  const handleDrag = (e, d) => {
+    // Edge Snap Detection during drag
+    const clientX = e.clientX ?? d.x;
+    const clientY = e.clientY ?? d.y;
+
+    if (clientY <= 45) {
+      setSnapPreview('top');
+    } else if (clientX <= 25) {
+      setSnapPreview('left');
+    } else if (clientX >= screenWidth - 25) {
+      setSnapPreview('right');
+    } else {
+      setSnapPreview(null);
+    }
+  };
+
+  const handleDragStop = (e, d) => {
+    setIsDragging(false);
+
+    if (snapPreview) {
+      applySnap(windowId, snapPreview);
+    } else {
+      // Clamp bounds: titlebar strictly at y >= 32
+      const clampedX = Math.max(-((win.width || 720) - 100), Math.min(d.x, screenWidth - 100));
+      const clampedY = Math.max(32, Math.min(d.y, screenHeight - 60));
+      updatePosition(windowId, { x: clampedX, y: clampedY });
+    }
+  };
 
   return (
     <Rnd
       {...rndProps}
-      style={{ zIndex: win.zIndex }}
+      style={{
+        zIndex: win.zIndex,
+        userSelect: isDragging ? 'none' : 'auto'
+      }}
       className={`os-window-wrapper ${isFocused ? 'is-focused' : ''} ${
         win.isMinimized ? 'is-minimized' : ''
       }`}
-      onDragStart={() => bringToFront(windowId)}
-      onDragStop={(e, d) => {
-        if (!isMaximized) {
-          updatePosition(windowId, { x: d.x, y: d.y });
-        }
+      onDragStart={() => {
+        setIsDragging(true);
+        bringToFront(windowId);
       }}
+      onDrag={handleDrag}
+      onDragStop={handleDragStop}
       onResizeStart={() => bringToFront(windowId)}
       onResizeStop={(e, direction, ref, delta, position) => {
         if (!isMaximized) {
@@ -66,7 +114,10 @@ const MacWindow = ({ windowId, children, customToolbar }) => {
             width: parseInt(ref.style.width, 10),
             height: parseInt(ref.style.height, 10)
           });
-          updatePosition(windowId, position);
+          updatePosition(windowId, {
+            x: position.x,
+            y: Math.max(32, position.y)
+          });
         }
       }}
       onMouseDown={() => bringToFront(windowId)}
@@ -74,6 +125,7 @@ const MacWindow = ({ windowId, children, customToolbar }) => {
       <div className="os-window">
         <div
           className="window-header"
+          data-cursor={isDragging ? 'grabbing' : 'grab'}
           onDoubleClick={() => toggleMaximize(windowId)}
         >
           <div className="window-header-left">
@@ -82,6 +134,8 @@ const MacWindow = ({ windowId, children, customToolbar }) => {
                 type="button"
                 className="traffic-dot close"
                 title="Close"
+                data-cursor="pointer"
+                data-cursor-text="Close"
                 onClick={(e) => {
                   e.stopPropagation();
                   closeWindow(windowId);
@@ -93,6 +147,8 @@ const MacWindow = ({ windowId, children, customToolbar }) => {
                 type="button"
                 className="traffic-dot minimize"
                 title="Minimize"
+                data-cursor="pointer"
+                data-cursor-text="Min"
                 onClick={(e) => {
                   e.stopPropagation();
                   minimizeWindow(windowId);
@@ -104,6 +160,8 @@ const MacWindow = ({ windowId, children, customToolbar }) => {
                 type="button"
                 className="traffic-dot maximize"
                 title={isMaximized ? 'Restore' : 'Maximize'}
+                data-cursor="pointer"
+                data-cursor-text="Zoom"
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleMaximize(windowId);

@@ -34,7 +34,7 @@
   }
 
   .sidebar-category-header {
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: 600;
     color: var(--text-tertiary);
     text-transform: uppercase;
@@ -98,7 +98,7 @@
   }
 
   .settings-section-subtitle {
-    font-size: 12px;
+    font-size: $font-size-sm;
     color: var(--text-secondary);
     margin-bottom: 22px;
   }
@@ -107,14 +107,14 @@
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: $radius-md;
-    padding: 16px;
-    margin-bottom: 18px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
 
     .card-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 0;
+      padding: 12px 0;
 
       &:not(:last-child) {
         border-bottom: 1px solid var(--glass-border-subtle);
@@ -123,14 +123,16 @@
       .row-label {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: 4px;
 
         span {
-          font-weight: 500;
+          font-size: $font-size-base; // 14.5-15.5px
+          font-weight: 600;
+          color: var(--text-primary);
         }
 
         small {
-          font-size: 11px;
+          font-size: $font-size-xs; // 13px
           color: var(--text-secondary);
         }
       }
@@ -197,7 +199,7 @@
       }
 
       span {
-        font-size: 12px;
+        font-size: $font-size-sm;
         font-weight: 500;
       }
     }
@@ -263,7 +265,7 @@
 
       .wallpaper-title {
         padding: 6px 4px 4px;
-        font-size: 11px;
+        font-size: $font-size-xs;
         font-weight: 500;
         text-align: center;
         color: var(--text-primary);
@@ -326,8 +328,8 @@
   border-radius: $radius-sm;
 
   .segment-btn {
-    padding: 4px 12px;
-    font-size: 12px;
+    padding: 6px 14px;
+    font-size: $font-size-sm;
     font-weight: 500;
     border-radius: 6px;
     transition: all $transition-fast;

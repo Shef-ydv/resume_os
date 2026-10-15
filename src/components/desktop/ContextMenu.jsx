@@ -4,7 +4,7 @@ import { useWindowManager } from '../../context/WindowManagerContext';
 import { useSettings } from '../../context/SettingsContext';
 
 const ContextMenu = ({ x, y, isOpen, onClose }) => {
-  const { openWindow, recruiterMode } = useWindowManager();
+  const { openWindow, recruiterMode, tileWindows, cascadeWindows, toggleMissionControl } = useWindowManager();
   const { lockScreen } = useSettings();
   const menuRef = useRef(null);
 
@@ -23,8 +23,8 @@ const ContextMenu = ({ x, y, isOpen, onClose }) => {
   if (!isOpen) return null;
 
   // Keep menu within screen viewport
-  const adjustedX = Math.min(x, window.innerWidth - 220);
-  const adjustedY = Math.min(y, window.innerHeight - 240);
+  const adjustedX = Math.min(x, window.innerWidth - 230);
+  const adjustedY = Math.min(y, window.innerHeight - 300);
 
   const handleAction = (cb) => {
     onClose();
@@ -59,6 +59,30 @@ const ContextMenu = ({ x, y, isOpen, onClose }) => {
       >
         <Settings />
         <span>System Settings</span>
+      </div>
+
+      <div className="context-divider" />
+
+      {/* Arrange Windows */}
+      <div
+        className="context-item"
+        onClick={() => handleAction(tileWindows)}
+      >
+        <span>Tile Windows Side by Side</span>
+      </div>
+
+      <div
+        className="context-item"
+        onClick={() => handleAction(cascadeWindows)}
+      >
+        <span>Cascade Windows</span>
+      </div>
+
+      <div
+        className="context-item"
+        onClick={() => handleAction(toggleMissionControl)}
+      >
+        <span>Mission Control (F3)</span>
       </div>
 
       <div className="context-divider" />

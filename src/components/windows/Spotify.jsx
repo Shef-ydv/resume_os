@@ -119,7 +119,7 @@ const Spotify = () => {
             borderBottom: '1px solid var(--glass-border-subtle)',
             justifyContent: 'space-between',
             alignItems: 'center',
-            fontSize: '11px',
+            fontSize: '0.8125rem',
             background: 'rgba(0,0,0,0.08)'
           }}
         >

@@ -177,7 +177,7 @@ const Note = () => {
                         <div key={s.name} style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', padding: '10px', borderRadius: '8px' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                             <strong>{s.name}</strong>
-                            <span style={{ fontSize: '11px', color: 'var(--accent)' }}>{s.proficiency}%</span>
+                            <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--accent)' }}>{s.proficiency}%</span>
                           </div>
                           <div style={{ height: '4px', background: 'var(--control-bg)', borderRadius: '2px', overflow: 'hidden' }}>
                             <div style={{ width: `${s.proficiency}%`, height: '100%', background: 'var(--accent)' }} />
@@ -192,7 +192,7 @@ const Note = () => {
                         <div key={s.name} style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', padding: '10px', borderRadius: '8px' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                             <strong>{s.name}</strong>
-                            <span style={{ fontSize: '11px', color: 'var(--accent)' }}>{s.proficiency}%</span>
+                            <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: 'var(--accent)' }}>{s.proficiency}%</span>
                           </div>
                           <div style={{ height: '4px', background: 'var(--control-bg)', borderRadius: '2px', overflow: 'hidden' }}>
                             <div style={{ width: `${s.proficiency}%`, height: '100%', background: 'var(--accent)' }} />

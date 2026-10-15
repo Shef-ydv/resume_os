@@ -26,7 +26,10 @@ const Nav = ({ onToggleControlCenter, onToggleSpotlight }) => {
     developerMode,
     openWindow,
     toggleMaximize,
-    minimizeWindow
+    minimizeWindow,
+    tileWindows,
+    cascadeWindows,
+    toggleMissionControl
   } = useWindowManager();
 
   const {
@@ -224,9 +227,31 @@ const Nav = ({ onToggleControlCenter, onToggleSpotlight }) => {
               <div className="dropdown-divider" />
               <div
                 className="dropdown-item"
+                onClick={() => handleMenuAction(tileWindows)}
+              >
+                <span>Tile Windows Side by Side</span>
+                <span className="dropdown-shortcut">⌥⌘T</span>
+              </div>
+              <div
+                className="dropdown-item"
+                onClick={() => handleMenuAction(cascadeWindows)}
+              >
+                <span>Cascade Windows</span>
+              </div>
+              <div
+                className="dropdown-item"
+                onClick={() => handleMenuAction(toggleMissionControl)}
+              >
+                <span>Mission Control</span>
+                <span className="dropdown-shortcut">F3</span>
+              </div>
+              <div className="dropdown-divider" />
+              <div
+                className="dropdown-item"
                 onClick={() => handleMenuAction(recruiterMode)}
               >
                 <span>Arrange for Recruiter</span>
+                <span className="dropdown-shortcut">⌘R</span>
               </div>
             </div>
           )}

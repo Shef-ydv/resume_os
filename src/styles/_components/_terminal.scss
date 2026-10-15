@@ -7,7 +7,7 @@
   flex-direction: column;
   background: rgba(18, 18, 22, 0.95);
   font-family: $font-mono;
-  font-size: 13px;
+  font-size: $font-size-base; // 15-16px
   color: #f1f1f1;
   overflow: hidden;
   position: relative;
@@ -103,15 +103,15 @@
   .ascii-art {
     color: var(--accent);
     line-height: 1.15;
-    font-size: 11px;
+    font-size: $font-size-xs;
     white-space: pre;
   }
 
   .neofetch-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    font-size: 12px;
+    gap: 6px;
+    font-size: $font-size-sm;
 
     .info-row {
       display: flex;

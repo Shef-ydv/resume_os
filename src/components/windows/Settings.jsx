@@ -24,6 +24,10 @@ const Settings = () => {
     dockMagnification,
     dockPosition,
     soundEnabled,
+    fontSize = 'medium',
+    cursorStyle = 'glow',
+    showIntro = true,
+    replayIntro,
     updateSettings
   } = useSettings();
 
@@ -78,7 +82,7 @@ const Settings = () => {
             <div>
               <div className="settings-section-title">Appearance</div>
               <div className="settings-section-subtitle">
-                Customize window chrome, color scheme, and system accent colors.
+                Customize window chrome, color scheme, text size, and custom mouse cursor.
               </div>
 
               {/* Light / Dark / Auto Cards */}
@@ -134,6 +138,55 @@ const Settings = () => {
                   </div>
                 </div>
 
+                {/* Text Size Control */}
+                <div className="card-row">
+                  <div className="row-label">
+                    <span>Text Size</span>
+                    <small>Adjust UI typography scale (Default: Medium)</small>
+                  </div>
+                  <div className="segmented-control">
+                    {[
+                      { id: 'small', label: 'Small' },
+                      { id: 'medium', label: 'Medium' },
+                      { id: 'large', label: 'Large' }
+                    ].map((sizeOpt) => (
+                      <button
+                        key={sizeOpt.id}
+                        type="button"
+                        className={`segment-btn ${fontSize === sizeOpt.id ? 'is-selected' : ''}`}
+                        onClick={() => updateSettings('fontSize', sizeOpt.id)}
+                      >
+                        {sizeOpt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Cursor Style Control */}
+                <div className="card-row">
+                  <div className="row-label">
+                    <span>Cursor Style</span>
+                    <small>Fluid mouse follower & interactive states</small>
+                  </div>
+                  <div className="segmented-control">
+                    {[
+                      { id: 'glow', label: 'Glow Ring' },
+                      { id: 'trail', label: 'Sparkle Trail' },
+                      { id: 'default', label: 'System Default' },
+                      { id: 'off', label: 'Off' }
+                    ].map((cOpt) => (
+                      <button
+                        key={cOpt.id}
+                        type="button"
+                        className={`segment-btn ${cursorStyle === cOpt.id ? 'is-selected' : ''}`}
+                        onClick={() => updateSettings('cursorStyle', cOpt.id)}
+                      >
+                        {cOpt.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="card-row">
                   <div className="row-label">
                     <span>Play UI Sound Effects</span>
@@ -145,6 +198,43 @@ const Settings = () => {
                   >
                     <div className="toggle-thumb" />
                   </div>
+                </div>
+
+                {/* Show Intro Animation Toggle */}
+                <div className="card-row">
+                  <div className="row-label">
+                    <span>Show Intro Animation</span>
+                    <small>Play minimal classic loading screen on startup</small>
+                  </div>
+                  <div
+                    className={`ios-toggle ${showIntro !== false ? 'is-on' : ''}`}
+                    onClick={() => updateSettings('showIntro', !showIntro)}
+                  >
+                    <div className="toggle-thumb" />
+                  </div>
+                </div>
+
+                {/* Replay Loading Screen Action */}
+                <div className="card-row">
+                  <div className="row-label">
+                    <span>Classic Loading Screen</span>
+                    <small>Preview or replay the elegant loading sequence</small>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={replayIntro}
+                    style={{
+                      padding: '6px 14px',
+                      borderRadius: '6px',
+                      background: 'var(--accent)',
+                      color: '#ffffff',
+                      fontSize: '13px',
+                      fontWeight: '600',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Replay Screen
+                  </button>
                 </div>
               </div>
             </div>

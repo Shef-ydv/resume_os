@@ -70,8 +70,8 @@ const Calendar = () => {
               borderRadius: '8px',
               background: 'rgba(var(--accent-rgb), 0.1)',
               border: '1px solid var(--accent)',
-              fontSize: '11px',
-              lineHeight: '1.4'
+              fontSize: '0.8125rem',
+              lineHeight: '1.45'
             }}
           >
             <strong>Looking for full-time talent?</strong>

@@ -30,7 +30,7 @@
   }
 
   .sidebar-section-title {
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: 600;
     color: var(--text-tertiary);
     text-transform: uppercase;
@@ -55,19 +55,20 @@
     gap: 4px;
 
     .event-title {
-      font-size: 12px;
+      font-size: $font-size-sm; // 14px
       font-weight: 600;
       color: var(--text-primary);
     }
 
     .event-date {
-      font-size: 11px;
+      font-size: $font-size-xs; // 13px
       color: var(--text-secondary);
     }
 
     .event-desc {
-      font-size: 11px;
+      font-size: $font-size-xs; // 13px
       color: var(--text-tertiary);
+      line-height: 1.4;
     }
   }
 }
@@ -77,7 +78,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: auto;
   @include mac-scrollbar;
 }
 
@@ -88,7 +89,7 @@
   margin-bottom: 20px;
 
   .month-title {
-    font-size: 20px;
+    font-size: $font-size-2xl; // ~24px
     font-weight: 700;
   }
 
@@ -97,10 +98,10 @@
     gap: 6px;
 
     button {
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: $radius-sm;
       background: var(--control-bg);
-      font-size: 12px;
+      font-size: $font-size-sm; // 14px
       font-weight: 500;
 
       &:hover {
@@ -117,7 +118,7 @@
   text-align: center;
 
   .calendar-day-name {
-    font-size: 11px;
+    font-size: $font-size-xs;
     font-weight: 600;
     color: var(--text-tertiary);
     padding: 8px 0;
@@ -151,8 +152,8 @@
         background: var(--accent);
         color: #ffffff;
         border-radius: 50%;
-        width: 22px;
-        height: 22px;
+        width: 24px;
+        height: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -160,7 +161,7 @@
     }
 
     .cell-number {
-      font-size: 12px;
+      font-size: $font-size-sm; // 14px
       font-weight: 500;
     }
 

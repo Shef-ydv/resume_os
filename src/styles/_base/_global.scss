@@ -2,6 +2,7 @@
 @use '../_abstracts/mixins' as *;
 
 :root {
+  --font-scale: 1;
   // Default Dark Theme Tokens
   --glass-bg: rgba(30, 30, 36, 0.72);
   --glass-border: rgba(255, 255, 255, 0.14);

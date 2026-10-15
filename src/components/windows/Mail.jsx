@@ -136,7 +136,7 @@ const Mail = () => {
             <CheckCircle2 />
             <div>
               <strong>Message Prepared!</strong>
-              <div style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+              <div style={{ fontSize: '0.8125rem', color: 'var(--text-secondary)' }}>
                 Opened email composer & dispatched to shefaliyadav1709@gmail.com
               </div>
             </div>
